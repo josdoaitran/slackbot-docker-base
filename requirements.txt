@@ -15,3 +15,4 @@ qrcode
 kafka-python
 boto3
 slackclient
+slack
