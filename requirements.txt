@@ -14,5 +14,5 @@ Pillow
 qrcode
 kafka-python
 boto3
-slackclient
-slack
+slack-sdk
+aiohttp
