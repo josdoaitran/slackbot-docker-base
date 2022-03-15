@@ -16,3 +16,4 @@ kafka-python
 boto3
 slack-sdk
 aiohttp
+curlify
