@@ -1,3 +1,5 @@
+errbot
+errbot[slack]
 websockets
 requests
 webexteamssdk

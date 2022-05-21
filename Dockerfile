@@ -2,16 +2,7 @@
 
 FROM debian:stable-slim
 
-
-
 ENV ERR_USER err
-ENV DEBIAN_FRONTEND noninteractive
-ENV PATH /app/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
-# Set default locale for the environment
-ENV LC_ALL C.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
 
 # Add err user and group
 RUN groupadd -r $ERR_USER \
@@ -20,6 +11,21 @@ RUN groupadd -r $ERR_USER \
        -d /srv \
        -s /bin/bash \
        $ERR_USER
+
+COPY requirements.txt /err/
+COPY app.sh /app.sh
+COPY entrypoint.sh /entrypoint.sh
+COPY config.py /err/
+
+RUN chmod +x /app.sh /entrypoint.sh
+
+ENV PATH /app/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Set default locale for the environment
+ENV LC_ALL C.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+
 # Install packages and perform cleanup
 RUN apt-get update \
   && apt-get -y install --no-install-recommends \
@@ -47,19 +53,16 @@ RUN apt-get update \
 	&& rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/cache/apt/archives
 
-RUN mkdir /app
+RUN pip install -r /err/requirements.txt
+RUN rm -f /err/requirements.txt
+RUN cp /usr/share/zoneinfo/America/Chicago /etc/localtime
 
-COPY requirements.txt /app/requirements.txt
-
-RUN virtualenv /app/venv
-RUN . /app/venv/bin/activate; pip install --no-cache-dir -r /app/requirements.txt
-
-COPY config.py /app/config.py
-COPY run.sh /app/venv/bin/run.sh
-
-RUN mkdir /srv/data /srv/plugins /srv/errbackends && chown -R $ERR_USER: /srv /app
+RUN /app.sh
+RUN rm -f /app.sh
 
 EXPOSE 3141 3142
-VOLUME ["/srv"]
 
-ENTRYPOINT ["/app/venv/bin/run.sh"]
+VOLUME ["/err/data/"]
+RUN chmod +x /err
+WORKDIR /err
+ENTRYPOINT ["/entrypoint.sh"]
