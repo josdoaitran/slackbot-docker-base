@@ -1,5 +1,11 @@
 # slackbot_docker_base
 
+## Setup local
+- Install Docker
+- Install python3
+- Setup virtual python on the project: 
+
+
 https://hub.docker.com/repository/docker/josdoaitran/slack_bot_contra
 
 
