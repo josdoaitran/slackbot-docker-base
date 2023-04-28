@@ -1,20 +1,2 @@
-websockets
-requests
-webexteamssdk
-PyYAML  >= 5.1
-pymysql==0.10.1
-mysql-connector
-requests
-numpy
-regex
-configparser
-pymongo==3.9.0
-jinja2
-Pillow
-qrcode
-kafka-python
-boto3
-slack-sdk
-aiohttp
-curlify
-pycryptodome
+errbot
+errbot[slack]

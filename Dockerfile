@@ -19,9 +19,6 @@ RUN apk add --no-cache --virtual .build-deps \
 RUN apk add gcc musl-dev python3-dev libffi-dev openssl-dev cargo jpeg-dev zlib-dev
 RUN apk add --no-cache openjdk8-jre
 RUN pip3 install --upgrade pip
-RUN pip3 install errbot==6.1.3
-RUN pip3 install errbot[slack]
-#RUN pip3 install mysql-connector
 RUN pip3 install -r /err/requirements.txt
 RUN rm -f /err/requirements.txt
 RUN cp /usr/share/zoneinfo/America/Chicago /etc/localtime

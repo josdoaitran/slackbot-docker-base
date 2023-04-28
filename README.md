@@ -3,13 +3,18 @@
 ## Setup local
 - Install Docker
 - Install python3
-- Setup virtual python on the project: 
+- Setup virtual python on the project:
+```commandline
+python3 -m venv .venv
+source .venv/bin/activate
+pip3 install -r requirements.txt
+```
 
-
-https://hub.docker.com/repository/docker/josdoaitran/slack_bot_contra
+Publish here: https://hub.docker.com/repository/docker/josdoaitran/slack_bot_alpha
 
 
 ```
-❯ docker tag slackbot/contra1.1 josdoaitran/slack_bot_contra:1.1
-❯ docker push josdoaitran/slack_bot_contra:1.1
+docker login
+❯ docker tag josdoaitran/slack_bot_alpha:1.2 josdoaitran/slack_bot_alpha:1.2
+❯ docker push josdoaitran/slack_bot_alpha:1.2
 ```
