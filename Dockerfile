@@ -29,3 +29,5 @@ RUN rm -f /base.sh
 
 RUN /app.sh
 RUN rm -f /app.sh
+
+COPY backend_plugins /opt/errbot/backend
