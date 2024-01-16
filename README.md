@@ -12,6 +12,12 @@ pip3 install -r requirements.txt
 
 Publish here: https://hub.docker.com/repository/docker/josdoaitran/slack_bot_alpha
 
+```agsl
+# Build image on MacOSX to publish for architecture: AMD86
+docker buildx build . --platform=linux/amd64 -t josdoaitran/slack_bot_alpha:3.1.1
+docker image inspect josdoaitran/slack_bot_alpha:3.1.1
+# Check Architecture 
+```
 
 ```
 docker login
